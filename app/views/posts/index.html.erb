@@ -1,4 +1,8 @@
 <% @posts.each do |post| %>
+  <h3>
+    <%= User.find(post.user_id).first_name %>
+    <%= User.find(post.user_id).last_name %>
+  </h3>
   <p><%= post.message %></p>
   <p style="color: #cccccc;"> <%= time_ago_in_words(post.created_at) %> ago</p>
   <%= button_to "Edit", edit_post_path(post.id), :method => :get %>
@@ -7,9 +11,10 @@
 
   <%= render partial: 'partials/comment_form', locals: { post_id: post.id } %>
 
-  <% @comments = Comment.all %>
+  <% @comments = Comment.where(post_id: post.id) %>
   <%= render partial: 'partials/post_comments', locals: { comments: @comments } %>
 
+  <hr>
 
 <% end %>
 <br><br>
