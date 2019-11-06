@@ -1,0 +1,21 @@
+<h3>Comments</h3>
+<br><br>
+<% comments.each do |comment| %>
+
+  <div>
+    <strong>
+      <%= User.find(comment.user_id).first_name %>
+      <%= User.find(comment.user_id).last_name %>
+    </strong>
+  </div>
+  <div>
+    <%= comment.message %>
+  </div>
+  <div>
+    <%= comment.created_at.strftime("%-d %B %Y %-l:%M%P") %>
+  </div>
+  <div>
+    &nbsp;
+  </div>
+
+<% end %>

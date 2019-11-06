@@ -12,10 +12,8 @@ RSpec.feature "Add comment", type: :feature do
     create_post
     # within ('.post') do
       fill_in 'message', with: comment_body
-      save_and_open_page
-      click_button 'Submit'
+      click_button 'Add Comment'
     # end
-    visit '/comments'
     expect(page).to have_content(comment_body)
   end
 end

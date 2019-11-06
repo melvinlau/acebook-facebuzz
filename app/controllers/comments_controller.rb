@@ -7,9 +7,8 @@ class CommentsController < ApplicationController
   end
 
   def create
-    @comment = Comment.create(comment_params.merge(user_id: current_user.id, post_id: post_id))
-
-    redirect_to comments_url
+    @comment = Comment.create(comment_params)
+    redirect_to posts_url
   end
 
   def edit
@@ -23,16 +22,11 @@ class CommentsController < ApplicationController
   private
 
   def comment_params
-    params.permit(:message, :user_id, :post_id)
-
-    # TODO
-    # params.require(:comment).permit(:message)
-
+    params.permit(:message, :post_id, :user_id)
   end
 
   def find_comment
     @comment = Comment.find(params[:id])
   end
-  
-end
 
+end

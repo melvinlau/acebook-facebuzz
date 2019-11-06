@@ -1,4 +1,9 @@
 FactoryBot.define do
+  factory :comment do
+    message { "MyText" }
+    user_id { 1 }
+    post_id { 1 }
+  end
   
   factory :user do
     first_name { "Test" }
