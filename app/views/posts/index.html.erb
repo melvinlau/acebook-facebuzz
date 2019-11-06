@@ -4,6 +4,7 @@
   <%= button_to "Edit", edit_post_path(post.id), :method => :get%>
   <%= button_to "Delete", post_path(post.id), :method => :delete,
   data: {confirm: 'Are you sure you want to delete this post?'}%>
+  <%= render partial: 'partials/comment_form', locals: {post_id: post.id} %>
 <% end %>
 
 <%= link_to new_post_path do %>

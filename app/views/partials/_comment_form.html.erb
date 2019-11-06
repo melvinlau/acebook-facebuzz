@@ -1,0 +1,7 @@
+
+<%= form_with model: @comments do |form|%>
+  <%= form.text_field :message %>
+  <% hidden_field_tag(:post_id, post_id) %>
+  <% hidden_field_tag(:user_id, current_user.id) %>
+  <%= form.submit %>
+<% end %> 
