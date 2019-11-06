@@ -1,0 +1,4 @@
+<%= form_with(url: '/comments', method: 'post') do %>
+  <%= text_field_tag(:message) %>
+  <%= submit_tag('Add Comment') %>
+<% end %>

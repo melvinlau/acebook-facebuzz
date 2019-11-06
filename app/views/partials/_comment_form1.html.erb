@@ -1,0 +1,7 @@
+<%= simple_form_for @comment do |comment| %>
+
+  <%= comment.input :body, as: :text%>
+  <br><br>
+  <%= comment.button :submit, 'Add Comment' %>
+
+<% end %>
