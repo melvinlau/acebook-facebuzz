@@ -23,6 +23,8 @@ Rails.application.routes.draw do
   root to: "welcome#index"
 
   #root to: "users#new"
+  get "/auth/github" => "users#new"
+  #get :create, provider: "github"
   get "/auth/:provider/callback" => "sessions#create"
   get "/signout" => "sessions#destroy", :as => :signout
 
