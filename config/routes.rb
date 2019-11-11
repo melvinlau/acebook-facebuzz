@@ -2,13 +2,18 @@ Rails.application.routes.draw do
   get 'users/profile'
   get 'welcome/index'
 
+<<<<<<< HEAD
+  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
+=======
   devise_for :users, controllers: {
     sessions: 'users/sessions',
     registrations: 'users/registrations',
     omniauth_callbacks: 'users/omniauth_callbacks'
   }
+>>>>>>> master
 
   get 'users/:id' => 'users#profile'
+  get ':username' => 'users#profile'
 
   resources :posts do
     member do
