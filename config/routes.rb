@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'omniauth/sessions'
   get 'users/profile'
   get 'welcome/index'
 
@@ -20,6 +21,10 @@ Rails.application.routes.draw do
   get 'users/:user_id/posts/new' => 'posts#new'
 
   root to: "welcome#index"
+
+  #root to: "users#new"
+  get "/auth/:provider/callback" => "sessions#create"
+  get "/signout" => "sessions#destroy", :as => :signout
 
   # devise_scope :user do
   #   delete 'sign_out', :to => 'devise/sessions#destroy', :as => :destroy_user_session

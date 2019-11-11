@@ -13,7 +13,8 @@
               <%= link_to('My Profile', "/users/#{current_user.id}", method: :get) %> &nbsp;&nbsp;
               <%= link_to('Log Out', destroy_user_session_path, method: :delete) %>
             <% else %>
-              <%= link_to "Log In", new_session_path(User) %>
+              <%= link_to "Log In", new_session_path(User) %>|
+              <%= link_to "Log in via GitHub", "/auth/github" %>
             <% end %>
             </form>
           </div>
