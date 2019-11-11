@@ -26,6 +26,7 @@ Rails.application.routes.draw do
   get "/auth/github" => "users#new"
   #get :create, provider: "github"
   get "/auth/:provider/callback" => "sessions#create"
+  get 'users/:id' => 'users#profile'
   get "/signout" => "sessions#destroy", :as => :signout
 
   # devise_scope :user do
