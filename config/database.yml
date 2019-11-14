@@ -5,11 +5,11 @@ default: &default
 
 development:
   <<: *default
-  database: pgapp_development
+  database: acebookapi_development
 
 test:
   <<: *default
-  database: pgapp_test
+  database: acebookapi_test
 
 production:
   <<: *default

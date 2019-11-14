@@ -1,44 +1,53 @@
 class UsersController < ApplicationController
-  rescue_from ActiveRecord::RecordNotFound, :with => :user_not_found  
+  before_action :set_user, only: [:show, :update, :destroy]
 
-  before_action :authenticate_user!, only: [:profile]
-
-  def profile
-    if (@user = User.where(username: params[:username]).first).present?
-      @user
-    elsif (@user = User.find(params[:id])).present?
-      @user
-    end
-    @wall_id = @user.id
-    @post = Post.new
-    @posts = Post.where(wall_id: @wall_id).order("created_at DESC")
-  end
-
-  
+  # GET /users
+  # GET /users.json
   def index
-
+    @users = User.all
   end
 
+  # GET /users/1
+  # GET /users/1.json
   def show
-    @user = User.find(params[:id])
   end
 
-  def new
-
-  end
-
+  # POST /users
+  # POST /users.json
   def create
     @user = User.new(user_params)
-    p @user
-    p user_params
-    @user.save!
-    p @user.avatarImage.url
+
+    if @user.save
+      render :show, status: :created, location: @user
+    else
+      render json: @user.errors, status: :unprocessable_entity
+    end
+  end
+
+  # PATCH/PUT /users/1
+  # PATCH/PUT /users/1.json
+  def update
+    if @user.update(user_params)
+      render :show, status: :ok, location: @user
+    else
+      render json: @user.errors, status: :unprocessable_entity
+    end
+  end
+
+  # DELETE /users/1
+  # DELETE /users/1.json
+  def destroy
+    @user.destroy
   end
 
   private
+    # Use callbacks to share common setup or constraints between actions.
+    def set_user
+      @user = User.find(params[:id])
+    end
 
-  def user_params
-    params.require(:user).permit(:avatarImage, :username, :first_name, :last_name, :password, :email)
-  end
-
+    # Never trust parameters from the scary internet, only allow the white list through.
+    def user_params
+      params.require(:user).permit(:username, :password_digest, :email)
+    end
 end

@@ -1,78 +1,55 @@
 class PostsController < ApplicationController
+  before_action :set_post, only: [:show, :update, :destroy]
 
-  before_action :signed_in
-  before_action :find_post, only: [:edit, :destroy, :show, :update, :upvote, :downvote]
-
-  def new
-    @post = Post.new
-  end
-
-  def create
-    @post = Post.create(post_params.merge(user_id: current_user.id))
-    redirect_to request.referrer
-  end
-
+  # GET /posts
+  # GET /posts.json
   def index
-    @wall_id = current_user.id
-    @post = Post.new
-    @posts = Post.all.order("created_at DESC")
+    @posts = Post.all
+    render json: @posts
   end
 
-  def index_by_user
-
-  end
-
-  def edit
-    @post = Post.find(params[:id])
-    @wall_id = @post.wall_id
-    session[:request] = request.referrer
-  end
-
-  def destroy
-    @post.destroy
-    redirect_to request.referrer
-  end
-
+  # GET /posts/1
+  # GET /posts/1.json
   def show
-
+    render json: @post
   end
 
+  # POST /posts
+  # POST /posts.json
+  def create
+    @post = Post.new(post_params)
+
+    if @post.save
+      render :show, status: :created, location: @post
+    else
+      render json: @post.errors, status: :unprocessable_entity
+    end
+  end
+
+  # PATCH/PUT /posts/1
+  # PATCH/PUT /posts/1.json
   def update
     if @post.update(post_params)
-      redirect_to session[:request]
+      render :show, status: :ok, location: @post
     else
-      render 'edit'
+      render json: @post.errors, status: :unprocessable_entity
     end
   end
 
-  def upvote
-    @post.upvote_by current_user
-    respond_to do |format|
-      format.html { redirect_back fallback_location: posts_url }
-      format.js { render layout:false }
-    end
-  end
-
-  def downvote
-    @post.downvote_by current_user
-    respond_to do |format|
-      format.html { redirect_back fallback_location: posts_url }
-      format.js { render layout:false }
-    end
+  # DELETE /posts/1
+  # DELETE /posts/1.json
+  def destroy
+    @post.destroy
   end
 
   private
+    # Use callbacks to share common setup or constraints between actions.
+    def set_post
+      @post = Post.find(params[:id])
+    end
 
-  def post_params
-    params.require(:post).permit(:wall_id, :message, :image)
-  end
-
-  def find_post
-    @post = Post.find(params[:id])
-  end
-
-  def signed_in
-    redirect_to '/' if !user_signed_in?
-  end
-
+    # Never trust parameters from the scary internet, only allow the white list through.
+    def post_params
+      params.require(:post).permit(:message, :user_id)
+    end
 end
