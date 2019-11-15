@@ -28,10 +28,8 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    p @user
-    p user_params
     @user.save!
-    p @user.avatarImage.url
+    @user.avatarImage.url
   end
 
   private
