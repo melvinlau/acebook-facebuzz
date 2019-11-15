@@ -6,9 +6,8 @@ RSpec.feature "Like post", type: :feature do
     login_user
     visit '/posts'
     create_post
-    click_link "Like"
-    # expect(page).to have_content("Buzzes: 1")
-    expect(page).to have_content('⚡️ Like 1')
+    find(:css, 'i.fa.fa-thumbs-up.fa-lg.has-text-primary').click
+    expect(page).to have_content('1')
   end
   
   scenario "User can like other user's post and number of likes will change" do
@@ -16,13 +15,13 @@ RSpec.feature "Like post", type: :feature do
     login_user
     visit '/posts'
     create_post
-    click_link "Like"
+    find(:css, 'i.fa.fa-thumbs-up.fa-lg.has-text-primary').click
     logout_user
     
     create_user_two
     login_user_two
     visit '/posts'
-    click_link "Like"
+    find(:css, 'i.fa.fa-thumbs-up.fa-lg.has-text-primary').click
     expect(page).to have_content("2")
   end
   
@@ -31,10 +30,10 @@ RSpec.feature "Like post", type: :feature do
     login_user
     visit '/posts'
     create_post
-    click_link "Like"
-    click_link "Like"
-    expect(page).not_to have_content('⚡️ Like 1')
-    expect(page).not_to have_content('⚡️ Like 2')
+    find(:css, 'i.fa.fa-thumbs-up.fa-lg.has-text-primary').click
+    find(:css, 'i.fa.fa-thumbs-up.fa-lg.has-text-primary').click
+    expect(page.first('span.vote_count')).not_to have_content('1')
+    expect(page.first('span.vote_count')).not_to have_content('2')
   end
   
 end
