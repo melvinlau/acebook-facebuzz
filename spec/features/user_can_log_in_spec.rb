@@ -30,7 +30,6 @@ RSpec.feature 'user login', type: :feature do
   end
 
   scenario "user cannot access another user's wall if they are not signed in" do
-    user = create_user
     user_2 = create_user_two
     visit "/users/#{user_2.id}"
     expect(page).not_to have_content("Jonny")
