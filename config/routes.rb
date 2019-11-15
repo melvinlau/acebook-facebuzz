@@ -7,11 +7,9 @@ Rails.application.routes.draw do
   }
   
 
-
     # authenticated :user do
       # root to: 'users/:id'
     # end
-
 
   resources :posts do
     member do
@@ -22,10 +20,8 @@ Rails.application.routes.draw do
 
 # root to: "welcome#index"
 
-get ':username' => 'users#profile'
-get 'users/:id' => 'users#profile'
-
-
+  get ':username' => 'users#profile'
+  get 'users/:id' => 'users#profile'
 
 # devise_for :users
   devise_scope :user do

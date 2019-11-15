@@ -6,7 +6,6 @@ class ApplicationController < ActionController::Base
     render :template => "errors/error_404_user", :status => 404
   end
 
-
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   protected

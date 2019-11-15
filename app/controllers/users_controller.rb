@@ -13,7 +13,6 @@ class UsersController < ApplicationController
     @post = Post.new
     @posts = Post.where(wall_id: @wall_id).order("created_at DESC")
   end
-
   
   def index
 
