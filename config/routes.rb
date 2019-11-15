@@ -14,7 +14,6 @@ Rails.application.routes.draw do
     end
   end
 
-
   get ':username' => 'users#profile'
   get 'users/:id' => 'users#profile'
 
