@@ -17,20 +17,19 @@ RSpec.feature 'user login', type: :feature do
     fill_in 'user[password]', with: 'password'
     click_button 'Log in'
     expect(page).to have_content("Signed in successfully")
-    expect(current_path).to eq ("/users/#{user.id}")
+    expect(current_path).to eq "/users/#{user.id}"
   end
 
   scenario "user can access any user's wall while logged in only " do
     user = create_user
     user_2 = create_user_two
     login_user
-    expect(current_path).to eq ("/users/#{user.id}")
+    expect(current_path).to eq "/users/#{user.id}"
     visit "/users/#{user_2.id}"
     expect(page).to have_content("Jonny")
   end
 
   scenario "user cannot access another user's wall if they are not signed in" do
-    user = create_user
     user_2 = create_user_two
     visit "/users/#{user_2.id}"
     expect(page).not_to have_content("Jonny")

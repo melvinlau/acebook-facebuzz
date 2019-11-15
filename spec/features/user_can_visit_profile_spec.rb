@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.feature 'User profile', type: :feature do
 
   scenario 'user can visit profile with their username' do
-    user = User.create(first_name: 'John', last_name: 'Doe', email: 'test@test.com', password: 'password', username: 'john')
+    User.create(first_name: 'John', last_name: 'Doe', email: 'test@test.com', password: 'password', username: 'john')
     visit "/"
     login_user
     visit "/john"
@@ -11,7 +11,7 @@ RSpec.feature 'User profile', type: :feature do
   end
 
   scenario 'visiting link with wrong username redirects to 404' do
-    user = User.create(first_name: 'John', last_name: 'Doe', email: 'test@test.com', password: 'password', username: 'john')
+    User.create(first_name: 'John', last_name: 'Doe', email: 'test@test.com', password: 'password', username: 'john')
     visit "/"
     login_user
     visit "/johns"

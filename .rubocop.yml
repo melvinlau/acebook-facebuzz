@@ -53,6 +53,15 @@ Metrics/BlockLength:
     - 'spec/**/*'
     - 'test/**/*'
 
+AllCops:
+  Exclude:
+    - './db/migrate/*'
+    - './db/schema.rb'
+    - './config/initializers/devise.rb'
+    - './config/initializers/backtrace_silencers.rb'
+    - './bin/*'
+
+
 # Code Style
 # ==========
 #

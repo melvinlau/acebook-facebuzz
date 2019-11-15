@@ -13,7 +13,6 @@ class UsersController < ApplicationController
     @post = Post.new
     @posts = Post.where(wall_id: @wall_id).order("created_at DESC")
   end
-
   
   def index
 
@@ -29,16 +28,15 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    p @user
-    p user_params
     @user.save!
-    p @user.avatarImage.url
   end
 
   private
 
   def user_params
-    params.require(:user).permit(:avatarImage, :username, :first_name, :last_name, :password, :email)
+    params.require(:user).permit(
+       :username, :first_name, :last_name, :password, :email
+      )
   end
 
 end

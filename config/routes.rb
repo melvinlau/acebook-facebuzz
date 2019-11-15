@@ -7,12 +7,6 @@ Rails.application.routes.draw do
   }
   
 
-
-    # authenticated :user do
-      # root to: 'users/:id'
-    # end
-
-
   resources :posts do
     member do
       put "like", to: "posts#upvote"
@@ -20,14 +14,9 @@ Rails.application.routes.draw do
     end
   end
 
-# root to: "welcome#index"
+  get ':username' => 'users#profile'
+  get 'users/:id' => 'users#profile'
 
-get ':username' => 'users#profile'
-get 'users/:id' => 'users#profile'
-
-
-
-# devise_for :users
   devise_scope :user do
     authenticated :user do
       root to: 'posts#index'

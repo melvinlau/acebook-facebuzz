@@ -2,9 +2,6 @@
 
   <div class="sidebar-container col-4 p-2">
     <div class="sidebar mr-2 p-2">
-      <!-- <div class="profile-avatar m-2 bg-white">
-          Avatar goes here
-      </div> -->
       <div class="profile-name p-2">
         <%=@user.first_name%> <%=@user.last_name%>
       </div>
@@ -24,8 +21,6 @@
         <div id="post" class="row">
           <div class="col-1">
             <div class="avatar my-3">
-              <!-- Temporarily disabled avatar -->
-              <!-- <img src="avatar.jpeg" class="avatar-small"> -->
             </div>
           </div>
           <div class="col-11">
@@ -43,15 +38,13 @@
               <div class="post-actions post-meta float-right">
                 <% if user_signed_in? %>
                   <% if current_user.voted_up_on? post %>
-                    <%= link_to unlike_post_path(post.id), method: :put, class: "unlike_post" do %>
-                      <span>⚡️ Like </span>
-                      <%# <span class="icon"><i class="fa fa-heart has-text-primary"></i></span> %>
+                    <%= link_to unlike_post_path(post.id), method: :put, class: "unlike_post", style: "text-decoration:none;" do %>
+                      <span class="icon"><i class="fa fa-thumbs-up fa-lg has-text-primary"></i></span>
                     <% end %>
                       <span class="vote_count"><%= post.get_upvotes.size %></span>
                   <% else %>
-                    <%= link_to like_post_path(post.id), method: :put, class: "like_post" do %>
-                      <span>⚡️ Like </span>
-                      <%# <span class="icon"><i class="fa fa-heart"></i></span> %>
+                    <%= link_to like_post_path(post.id), method: :put, class: "like_post", style: "text-decoration:none;" do %>
+                      <span class="icon"><i class="fa fa-thumbs-up fa-lg has-text-primary"></i></span>
                     <% end %>
                     <% if post.get_upvotes.size > 0%>
                       <span class="vote_count"><%= post.get_upvotes.size %></span>

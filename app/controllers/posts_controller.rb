@@ -49,7 +49,7 @@ class PostsController < ApplicationController
     @post.upvote_by current_user
     respond_to do |format|
       format.html { redirect_back fallback_location: posts_url }
-      format.js { render layout:false }
+      format.js { render layout: false }
     end
   end
 
@@ -57,7 +57,7 @@ class PostsController < ApplicationController
     @post.downvote_by current_user
     respond_to do |format|
       format.html { redirect_back fallback_location: posts_url }
-      format.js { render layout:false }
+      format.js { render layout: false }
     end
   end
 
@@ -72,7 +72,7 @@ class PostsController < ApplicationController
   end
 
   def signed_in
-    redirect_to '/' if !user_signed_in?
+    redirect_to '/' unless user_signed_in?
   end
 
 end
